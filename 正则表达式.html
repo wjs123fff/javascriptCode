@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<script>
+// 正则表达式的表示方法：
+    // var reg = /abc/;
+    // var str = "abcd";//返回的是true，
+    // var str = "abdc";//返回false，因为与reg不符
+
+
+    //  var reg = /abc/i;
+    // // i:ignoreCase忽视大小写的意思
+    // var str1 = "ABCDE"//返回的是true
+    // var str1 = "ABGCxm"//返回false
+
+     // var reg = /abc/g;
+    // g:全局搜索，把所以尽可能匹配的项都找出来
+    // var reg = /ab/g;
+    // var str = "ababababab";
+    // console.log(str.match(reg));
+    //
+    // var reg = /^a/mg;
+    // //m:执行多行匹配(经常和g进行搭配)
+    // var  str = "abc\na";
+    // console.log(str.match(reg));
+
+
+    // 创建构造函数
+    // var reg = new RegExp("abcd","igm");
+    // var str2 = "abcd";
+    // console.log(reg.test(str2));true
+
+    // 这两种方法创建的正则表达式是不一致的，相互独立，如果将构造函数的new去掉，var  = RegExp("abc","img")与var reg = /abc/img 本质上是一样
+    //
+    //
+    // var reg = /[0-9][0-9][0-9]/g
+    // var str = "02380dvh38c9f86r8yc786ceff08e9e29eu9027e";
+    // console.log(str.match(reg));
+    //
+    // \w === [0-9A-z_]
+    // \W === [^\w]
+
+    // var reg = /\Wcd2/g;
+    // var str = "b@cd2";
+    // console.log(str.match(reg));
+    //
+    // \d === [0-9]
+    // \D === [^\d]
+    // \b === 单词边界
+    // \B === 非单词边界
+
+    // var reg = /\bc/g;
+    // var str = "边界abc边界 边界cde边界 边界fgh边界";
+    // console.log(str.match(reg));
+    //
+    //  . === [^\r\n]
+    //  查找一切可能字符，除了换行和结束符
+    //
+    //n+     {1, 正无穷}
+    //n*      {0, zwq}
+    //n?      {0，1}
+    //n{X}     {X}
+    //n{x,y}    {x,y}
+    //n{x,zwq}  {x,zwq}
+    //
+     // var reg = /\w*/g;
+     // var str = "abc";
+     // console.log(str.match(reg));
+     // 出现空格是因为当匹配完后，w就为空，而光标匹配后停在了c处，所以*就往后匹配了一个空格
+     //
+     // 正则表达式遵循贪婪匹配原则，能多就不会少
+     //
+     // ^与$
+      // var reg = /^abc&/g
+      // var str1 = "abcabc";
+      // console.log(str.match(reg));
+      // 出现null是因为虽然是以abc为开头和结尾，但是这个开头和结尾必须是同一个
+      //
+      //
+      // 检验一个字符串，首尾是否含有数字
+      // 题目解析：首或尾是否含有数字
+      // var reg = /^\d|\d$/g;
+      // var str = "123abc";
+      // console.log(str.match(reg));
+      //
+      // 题目解析：首尾都含有数字
+          // var reg = /^\d[\s\S]*\d$/g;
+          // var str = "123abc123";
+          // console.log(str.match(reg));
+          //
+          // reg.exec(); 重点，必须掌握
+          var reg = /ab/g
+          var str = "abababab";
+          console.log(reg.exec(str));
+
+        // 输出结果就是每console一次，它都会返回一个类数组，而数字里面的index会根据游标停留的位置进行加一，当循环结束后又重新开始。所以reg.exec()方法就是对应着游标的遍历循环来进行匹配的，console.log(reg.lastIndex)
+        //
+        // 可以通过手动更改index的值来更改游标的位置，例如，reg.lastindex 本来对于第一次匹配，从0开始进行，所以第二次的位置一个是2，但是当我们更改游标的位置为0时，游标又开始从0开始遍历。
+        //
+        // 而加g和不加g的区别在于，如果不加，则默认匹配到第一个ab就截止，所以游标会一直从0开始。
+        //
+        // var reg = /(\w)\1\1\1/g;
+        // var str = "aaaabbbb";
+        // console.log(str.match(reg));
+        // 返回结果["aaaa","bbbb"]，括号在本身没有任何意义，但是在正则表达式里面它具有记录字符表达式的功能，而我们可以通过"\1"将它反义出来，从而达到引用效果
+        //
+        //string方法作用于正则表达式
+        // var reg = /(\w)\1(\w)\2(\w)\3/g;
+        // var str = "aabbcc";
+        // console.log(reg.exec(str));
+        // console.log(str.match(reg));(备注：当正则表达式加g时，match方法返回的只是找到的符合要求的字符，当不加g的时，返回的和调用exec方法返回的结果一样)
+        //console.log(str.search(reg));(作用检索与正则表达式相匹配的值。备注:与加g和不加g无关，只是返回匹配的位置，如果匹配不到返回-1)
+        //console.log(str.splice(reg));(按照正则表达式里面的字符作为截点，将字符串进行分割为字符串数组)
+        //
+        // var str = "aa";
+        // console.log(str.replace("a","b"));
+        // 返回的结果不是bb而是ab，因为replace方法虽然有替换功能，但是它不具有全局功能
+        //var reg = /a/g
+        //var str = "aa";
+        // console.log(str.replace(reg,"b"));
+        // 返回的是bb,当然如果这个正则表达式不加g，没有全局搜索匹配的功能，答案肯定还是g
+        //
+        //当然这不是replace与正则表达式结合最强大的功能。
+        // var reg = /(\w)\1(\w)\2/g
+        // var str = "aabb";
+        // console.log(str.replace(reg,"$2$2$1$1"));
+        //返回的结果是bbaa
+        //
+        //如果你觉得这样还不够高大上，ok，满足你
+        // var reg = /(\w)\1(\w)\2/g
+        // var str = "aabb";
+        // console.log(str.replace(reg,function ($,$1,$2) {
+        //      return $2+$2+$1+$1;
+        // }));
+       // 题目：将the-first-name 变为 theFirstName
+        // var reg = /-(\w)/g;
+        // var str = "the-first-name";
+        // console.log(str.replace(reg,function($,$1) {
+        //        return $1.toUpperCase();
+        // }));
+        //
+        // 正项预查 正项断言
+        //
+        // var str = "abaaaa";
+        // var reg = /a(?=b)/g
+        // console.log(str.match(reg));
+      // /a(?=b)/g指的是a后面跟着b，但是b只参与修饰限定，不参与选择
+      // /a(?!b)/g指的是后面跟的不是b的a
+      //
+      // 虽然正则表达是遵循贪婪原则，但在一定情况下是可以打破这种原则的，即：var reg = /正则表达式？/,"?"就可以打破这种原则
+      //
+      // 当将有意义的字符作为字符串进行匹配的时候，要将 在前面加一个反斜杠"\"
+      // var str = "aaa?aaa";
+      // var reg = /\?/g;
+      //
+      // 正则表达式去重
+
+          // var reg = /(\w)\1*/g;
+          // var str = "aaaaaabbbbbbccccc";
+          // console.log(str.match(reg));
+
+           // console.log(str.replace(reg,"$1"));
+           //
+           // 题目练习：10000000000，要求从后往前，每三为打一个点
+           // var str = "1000000000000";
+           // var reg = /(?=(\B)(\d{3})+$)/g;
+           // console.log(str.replace(reg,"."));
+
+</script>
+</body>
+</html>
